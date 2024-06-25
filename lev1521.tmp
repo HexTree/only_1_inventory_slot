@@ -1,12 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://v2pl8i1jqlnl"]
+[gd_scene load_steps=13 format=3 uid="uid://v2pl8i1jqlnl"]
 
 [ext_resource type="Script" path="res://level.gd" id="1_6k8gl"]
 [ext_resource type="Texture2D" uid="uid://b67s4p7gvy7fq" path="res://Art/desert_A.png" id="1_p2gtr"]
 [ext_resource type="Texture2D" uid="uid://bd65el3amu5uu" path="res://Art/HC_Humans1A.png" id="2_68seh"]
 [ext_resource type="Script" path="res://Player.gd" id="2_bcv8s"]
-[ext_resource type="PackedScene" uid="uid://dnyxwn5wgw3q8" path="res://character.tscn" id="4_yj0go"]
-[ext_resource type="Script" path="res://Node2D.gd" id="5_erl6x"]
-[ext_resource type="Texture2D" uid="uid://btwm3psihd7xp" path="res://Art/FantasyWeaponIcons_png/axes/axe_03_t.png" id="6_rg278"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m8hi3"]
 texture = ExtResource("1_p2gtr")
@@ -208,7 +205,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Character/Sprite2D:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -225,7 +222,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Character/Sprite2D:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -242,7 +239,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Character/Sprite2D:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -259,7 +256,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Character/Sprite2D:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -276,7 +273,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Character/Sprite2D:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -306,28 +303,17 @@ layer_0/tile_data = PackedInt32Array(-131073, 65536, 11, -196608, 65536, 11, -13
 [node name="Player" type="Node2D" parent="."]
 script = ExtResource("2_bcv8s")
 
-[node name="Character" parent="Player" instance=ExtResource("4_yj0go")]
-
-[node name="Sprite2D" type="Sprite2D" parent="Player/Character"]
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture = ExtResource("2_68seh")
-offset = Vector2(0, 1)
 hframes = 12
 vframes = 8
 frame = 52
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Character"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_p3nlx")
-}
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
-[node name="TestAxe" type="Node2D" parent="."]
-script = ExtResource("5_erl6x")
-
-[node name="Sprite2D" type="Sprite2D" parent="TestAxe"]
-position = Vector2(128, -128)
-texture = ExtResource("6_rg278")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_p3nlx")
+}

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8csisvb0ohqh"]
+
+[ext_resource type="PackedScene" uid="uid://v2pl8i1jqlnl" path="res://level.tscn" id="1_i2kwm"]
+[ext_resource type="Script" path="res://main.gd" id="1_o8kqf"]
+[ext_resource type="PackedScene" uid="uid://bn5mjgjokhnao" path="res://hud.tscn" id="2_kdupe"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_o8kqf")
+
+[node name="Level" parent="." instance=ExtResource("1_i2kwm")]
+
+[node name="HUD" parent="." instance=ExtResource("2_kdupe")]
+
+[node name="StartButton" parent="HUD" index="0"]
+visible = true
+
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
+
+[editable path="Level"]
+[editable path="HUD"]

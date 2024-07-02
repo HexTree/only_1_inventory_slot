@@ -1,56 +1,47 @@
 extends Node2D
 
 @onready var character = $"Character"
-@onready var camera = $"Camera2D"
 
-var is_busy = false
-var current_movement = null
-var movement_queue = []
+var lock_input = true
 
 func _ready():
 	if character == null:
 		print("Error: Character is not assigned or found.")
-	else:
-		character.connect("move_completed", self._on_move_completed)
-
-	if camera == null:
-		print("Error: Camera is not assigned or found.")
-	else:
-		camera.make_current()
+	
+	var camera = Camera2D.new()
+	character.add_child(camera)
+	camera.zoom = Vector2(2, 2)
+	camera.make_current()
 
 func _input(event):
 	if event is InputEventKey and event.is_action_type():
 		if event.is_pressed():
-			if Input.is_action_pressed("left") and "left" not in movement_queue:
-				movement_queue.append("left")
-			elif Input.is_action_pressed("right") and "right" not in movement_queue:
-				movement_queue.append("right")
-			elif Input.is_action_pressed("up") and "up" not in movement_queue:
-				movement_queue.append("up")
-			elif Input.is_action_pressed("down") and "down" not in movement_queue:
-				movement_queue.append("down")
-		else:
-			if not Input.is_action_pressed("left") and "left" in movement_queue:
-				movement_queue.erase("left")
-			if not Input.is_action_pressed("right") and "right" in movement_queue:
-				movement_queue.erase("right")
-			if not Input.is_action_pressed("up") and "up" in movement_queue:
-				movement_queue.erase("up")
-			if not Input.is_action_pressed("down") and "down" in movement_queue:
-				movement_queue.erase("down")
-
-		if not is_busy:
-			handle_movement()
-
-func handle_movement():
-	if is_busy or movement_queue.size() == 0:
-		return
-
-	current_movement = movement_queue[-1]
-	is_busy = true
-	character.move_character(current_movement)
-
-func _on_move_completed():
-	is_busy = false
-	if movement_queue.size() > 0:
-		handle_movement()
+			var current_movement
+			if Input.is_action_pressed("left"):
+				current_movement = "left"
+			elif Input.is_action_pressed("right"):
+				current_movement = "right"
+			elif Input.is_action_pressed("up"):
+				current_movement = "up"
+			elif Input.is_action_pressed("down"):
+				current_movement = "down"
+			if lock_input or current_movement == null:
+				return
+			var target_grid_position = character.grid_position
+			match current_movement:
+				"left":
+					target_grid_position.x -= 1
+				"right":
+					target_grid_position.x += 1
+				"up":
+					target_grid_position.y -= 1
+				"down":
+					target_grid_position.y += 1
+			if not character.can_move(target_grid_position):
+				lock_input = false
+				return
+			lock_input = true
+			character.move_character(current_movement)
+		
+func do_move():
+	lock_input = false

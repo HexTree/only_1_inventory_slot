@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var tile_map = $"../TileMap"
 
-var grid_position = Vector2(3, 3)
+var grid_position
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,7 +11,7 @@ func _ready():
 	scale *= (tile_map.tile_set.tile_size.x / max_width)
 	position = tile_map.map_to_local(grid_position)
 	
-	get_parent().item_map[grid_position] = self
+	#get_parent().item_map[grid_position] = self
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

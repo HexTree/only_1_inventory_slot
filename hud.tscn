@@ -22,19 +22,19 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 text = "Start"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Inventory" type="Node2D" parent="."]
+position = Vector2(576, 48)
+
+[node name="ColorRect" type="ColorRect" parent="Inventory"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -23.0
-offset_top = 24.0
+offset_top = -24.0
 offset_right = 23.0
-offset_bottom = 72.0
+offset_bottom = 24.0
 grow_horizontal = 2
-color = Color(1, 0, 1, 1)
-
-[node name="Inventory" type="Node2D" parent="."]
-position = Vector2(576, 48)
+color = Color(0.246835, 0.660652, 0.585147, 1)
 
 [node name="ItemSprite" type="Sprite2D" parent="Inventory"]
 position = Vector2(6.10352e-05, 0)

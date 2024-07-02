@@ -11,9 +11,6 @@ script = ExtResource("1_o8kqf")
 
 [node name="HUD" parent="." instance=ExtResource("2_kdupe")]
 
-[node name="StartButton" parent="HUD" index="0"]
-visible = true
-
 [connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
 
 [editable path="Level"]
